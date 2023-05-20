@@ -1,10 +1,14 @@
 class Recipe {
   final String name;
-  final Duration cookDuration;
+  final String cookDuration;
   final List<String> ingredients;
   final String image;
   final String methodOfPreparation;
 
-  Recipe(this.name, this.cookDuration, this.ingredients, this.image,
-      this.methodOfPreparation);
+  Recipe(
+      {required this.name,
+      required this.cookDuration,
+      required this.ingredients,
+      required this.image,
+      required this.methodOfPreparation});
 }
