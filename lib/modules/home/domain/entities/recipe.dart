@@ -3,7 +3,7 @@ class Recipe {
   final String cookDuration;
   final List<String> ingredients;
   final String image;
-  final String methodOfPreparation;
+  final List<String> methodOfPreparation;
 
   Recipe(
       {required this.name,
