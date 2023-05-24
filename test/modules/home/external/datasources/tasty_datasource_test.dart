@@ -10,7 +10,7 @@ import '../utils/tasty_api_response_mock.dart';
 
 void main() {
   final dio = Dio(BaseOptions());
-  final adapterDio = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
+  final adapterDio = DioAdapter(dio: dio);
   final datasource = TastyDatasource(dio);
 
   setUp(() => dotenv.load(fileName: '.env'));

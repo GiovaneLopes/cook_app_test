@@ -14,18 +14,20 @@ class TastyDatasource extends GetRecipeDatasource {
   Future<List<RecipeModel>> getRecipesList() async {
     apiKey = dotenv.get('TASTY_API_KEY');
     final response = await dio.get('https://tasty.p.rapidapi.com/feeds/list',
-        options: Options(method: 'GET', extra: {
+        queryParameters: {
           'size': '5',
-          'timezone': DateTime.now().timeZoneOffset,
+          'timezone': '-0300',
           'vegetarian': 'false',
           'from': '0'
-        }, headers: {
-          'X-RapidAPI-Key': apiKey,
-          'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
-        }));
+        },
+        options: Options(
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key': apiKey,
+              'X-RapidAPI-Host': 'tasty.p.rapidapi.com'
+            }));
     if (response.statusCode == 200) {
       final map = response.data as Map<String, dynamic>;
-
       final list = <RecipeModel>[];
       map.forEach((key, value) {
         final result = value as List;
