@@ -40,6 +40,7 @@ class RecipeModel extends Recipe {
   }
 
   factory RecipeModel.fromMap(Map<String, dynamic> map) {
+    print('### map: $map');
     return RecipeModel(
       name: map['item']['name'] ?? '',
       cookDuration: map['item']['total_time_minutes'].toString(),
@@ -86,6 +87,7 @@ class RecipeModel extends Recipe {
 extension RecipeModelExtension on RecipeModel {
   static List<String> getIngredientsList(dynamic sections) {
     final ingredientList = <String>[];
+    print('### sections: $sections');
     sections
         .map((section) => section['components'].map((component) {
               ingredientList.add(component['raw_text']);
