@@ -15,7 +15,7 @@ class RecipeModel extends Recipe {
 
   RecipeModel copyWith({
     String? name,
-    String? cookDuration,
+    int? cookDuration,
     List<String>? ingredients,
     String? image,
     List<String>? methodOfPreparation,
@@ -40,10 +40,9 @@ class RecipeModel extends Recipe {
   }
 
   factory RecipeModel.fromMap(Map<String, dynamic> map) {
-    print('### map: $map');
     return RecipeModel(
       name: map['item']['name'] ?? '',
-      cookDuration: map['item']['total_time_minutes'].toString(),
+      cookDuration: map['item']['total_time_minutes'] ?? 0,
       ingredients:
           RecipeModelExtension.getIngredientsList(map['item']['sections']),
       image: map['item']['thumbnail_url'] ?? '',
@@ -85,22 +84,25 @@ class RecipeModel extends Recipe {
 }
 
 extension RecipeModelExtension on RecipeModel {
-  static List<String> getIngredientsList(dynamic sections) {
+  static List<String> getIngredientsList(List? sections) {
     final ingredientList = <String>[];
-    print('### sections: $sections');
-    sections
-        .map((section) => section['components'].map((component) {
-              ingredientList.add(component['raw_text']);
-            }).toList())
-        .toList();
+    if (sections != null) {
+      sections
+          .map((section) => section['components'].map((component) {
+                ingredientList.add(component['raw_text']);
+              }).toList())
+          .toList();
+    }
     return ingredientList;
   }
 
-  static List<String> prepareMethod(dynamic sections) {
+  static List<String> prepareMethod(List? prepareMethods) {
     final preparationItens = <String>[];
-    sections
-        .map((section) => preparationItens.add(section['display_text']))
-        .toList();
+    if (prepareMethods != null) {
+      prepareMethods
+          .map((method) => preparationItens.add(method['display_text']))
+          .toList();
+    }
     return preparationItens;
   }
 }
