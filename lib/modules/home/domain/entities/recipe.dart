@@ -1,6 +1,6 @@
 class Recipe {
   final String name;
-  final String cookDuration;
+  final int cookDuration;
   final List<String> ingredients;
   final String image;
   final List<String> methodOfPreparation;

@@ -14,6 +14,7 @@ class GetRecipesListRepositoryImpl implements GetRecipeRepository {
       final result = await getRecipeDatasource.getRecipesList();
       return Right(result);
     } catch (e) {
+
       return Left(DatasourceFailure());
     }
   }
